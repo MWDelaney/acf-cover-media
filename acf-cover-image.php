@@ -40,6 +40,41 @@ License: MIT
     }
 
 
+
+/**
+ * Set classes for the cover image container. These can be overridden or added to with a filter like the following:
+ *     add_filter( 'cover_image_set_classes', 'custom_cover_classes' );
+ *     function custom_cover_classes($classes) {
+ *         if(is_page_template('template-landing-page.php') {
+ *             $classes[]   = 'on-landing-page';
+ *         }
+ *         return $classes;
+ *     }
+ *         
+ * @return string string of classes
+ */
+function ci_classes() {
+    $classes    = array();
+    $classes[]  = 'cover-media-container';
+    $classes[]  = 'cover-media-' . get_field('cover_image_layout');
+    
+    $classes = array_filter(array_map('trim', $classes));
+    echo trim(implode(' ', apply_filters( 'cover_image_set_classes', $classes )));
+}
+
+
+
+/**
+ * Insert cover image templates
+ * 
+ * @param string $content The original WordPress content
+ * @return string
+ */
+    function acfci_cover() {
+        $content = do_shortcode('[acf-cover]');
+        echo $content;
+    }
+
 /**
  * Main Complex Titles class
  */
@@ -52,8 +87,9 @@ License: MIT
 
             function __construct() {
 
-                //Initialize ACF fields
-                //add_action( 'init', array( $this, 'create_acf_fields' ) );	  
+
+                //Initialize shortcodes
+                add_action( 'init', array( $this, 'add_shortcodes' ) );	  
                
                 // Enqueue front-end styles
                 add_action('wp_enqueue_scripts', array( $this, 'front_end_styles' ) );
@@ -89,14 +125,18 @@ License: MIT
              * Add cover image layout classes to the body
              */
             function body_classes( $classes ) {
-                if($layout = get_field('cover_image_layout')) {
-                    $classes[] = 'cover-image-layout-' . $layout ;
+                if(get_field('cover_type_of_media') != 'none') {
+                    $classes[]      = 'cover-media';
+                    $classes[]      = 'cover-media-' . get_field('cover_type_of_media');
+                    $classes[]      = 'cover-media-layout-' . get_field('cover_media_layout');
                 }
                 return $classes;
             }
 
 
-
+            /**
+             * Enqueue front-end styles, add inline styles when enqueued
+             */
 			function front_end_styles() {
 				wp_enqueue_style(
 					'acfci-styles',
@@ -104,11 +144,34 @@ License: MIT
 				);
 				$image = get_field('cover_image');
 		        $custom_css = "
-		                .cover-image {
+		                .cover-media-container {
 		                        background-image: url(" . $image['url'] . ");
 		                }";
 		        wp_add_inline_style( 'acfci-styles', $custom_css );
 			}
+
+
+
+            /**
+             * Add 'acf-cover' shortcode
+             *
+             * @uses acf-cover Function to build the shorcode
+             */
+                function add_shortcodes() {
+                      add_shortcode( 'acf-cover', array($this, 'acf_cover'));
+                }
+
+
+
+            /**
+             * Build the shortcode, call templates
+             */
+                function acf_cover() { 
+                    ob_start();
+                    ci_template( 'cover-base', get_post_type() );
+                    return ob_get_clean();
+                }
+
 
     }
 

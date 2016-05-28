@@ -16,11 +16,11 @@ if( function_exists('acf_add_local_field_group') ):
      */
     $args = array (
 		'key' => 'group_574887694af90',
-		'title' => 'Cover Image Area',
+		'title' => 'Cover Media',
 		'fields' => array (
 			array (
 				'key' => 'field_57488a37d3103',
-				'label' => 'Image',
+				'label' => 'Media',
 				'name' => '',
 				'type' => 'tab',
 				'instructions' => '',
@@ -35,14 +35,70 @@ if( function_exists('acf_add_local_field_group') ):
 				'endpoint' => 0,
 			),
 			array (
+				'key' => 'field_57488a37d3104',
+			    'label' => 'Type of Media',
+			    'name' => 'cover_type_of_media',
+			    'type' => 'radio',
+			    'instructions' => '',
+			    'required' => 0,
+			    'conditional_logic' => 0,
+			    'wrapper' => array (
+			        'width' => '',
+			        'class' => '',
+			        'id' => '',
+			    ),
+			    'choices' => array (
+			        'none' => 'None',
+			        'image' => 'Image',
+			        'video' => 'Video',
+			    ),
+			    'other_choice' => 0,
+			    'save_other_choice' => 0,
+			    'default_value' => '',
+			    'layout' => 'horizontal',
+			),
+			array (
+				'key' => 'field_57488a37d3105',
+			    'label' => 'Media Placeholder',
+			    'name' => '',
+			    'type' => 'message',
+			    'instructions' => '',
+			    'required' => 0,
+			    'conditional_logic' => array (
+			        array (
+			            array (
+			                'field' => 'field_57488a37d3104',
+			                'operator' => '==',
+			                'value' => 'none',
+			            ),
+			        ),
+			    ),
+			    'wrapper' => array (
+			        'width' => '',
+			        'class' => 'acf-media',
+			        'id' => '',
+			    ),
+			    'message' => 'No media will be displayed.',
+			    'new_lines' => 'wpautop',
+			    'esc_html' => 0,
+			),
+			array (
 				'key' => 'field_5748877b3a530',
 				'label' => 'Cover Image',
 				'name' => 'cover_image',
 				'type' => 'image',
 				'instructions' => '',
 				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array (
+			    'conditional_logic' => array (
+			        array (
+			            array (
+			                'field' => 'field_57488a37d3104',
+			                'operator' => '==',
+			                'value' => 'image',
+			            ),
+			        ),
+			    ),
+			    'wrapper' => array (
 					'width' => '',
 					'class' => 'acf-media',
 					'id' => '',
@@ -57,6 +113,30 @@ if( function_exists('acf_add_local_field_group') ):
 				'max_height' => '',
 				'max_size' => '',
 				'mime_types' => '',
+			),
+			array (
+				'key' => 'field_5748877b3a531',
+			    'label' => 'Video',
+			    'name' => 'cover_video_hosted',
+			    'type' => 'oembed',
+			    'instructions' => '',
+			    'required' => 0,
+			    'conditional_logic' => array (
+			        array (
+			            array (
+			                'field' => 'field_57488a37d3104',
+			                'operator' => '==',
+			                'value' => 'video',
+			            ),
+			        ),
+			    ),
+			    'wrapper' => array (
+			        'width' => '',
+			        'class' => 'acf-media',
+			        'id' => '',
+			    ),
+			    'width' => '',
+			    'height' => '',
 			),
 			array (
 				'key' => 'field_57488a41d3104',
@@ -77,7 +157,7 @@ if( function_exists('acf_add_local_field_group') ):
 			array (
 				'key' => 'field_574887b23a531',
 				'label' => 'Layout',
-				'name' => 'cover_image_layout',
+				'name' => 'cover_media_layout',
 				'type' => 'select',
 				'instructions' => 'The general orientation of the image. This will help us position the title and call to action over it.',
 				'required' => 0,
