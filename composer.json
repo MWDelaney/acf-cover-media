@@ -1,8 +1,8 @@
 {
-  "name": "mwdelaney/acf-cover-image",
-  "description": "Easy, consistent cover image fields for WordPress and ACF Pro 5.",
+  "name": "mwdelaney/acf-cover-media",
+  "description": "Easy, consistent cover media fields for WordPress and ACF Pro 5.",
   "keywords": ["wordpress", "plugin", "advanced custom fields"],
-  "homepage": "https://github.com/MWDelaney/acf-cover-image",
+  "homepage": "https://github.com/MWDelaney/acf-cover-media",
   "license": "MIT",
   "authors": [
     {
