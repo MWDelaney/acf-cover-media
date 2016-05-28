@@ -142,12 +142,15 @@ function ci_classes() {
 					'acfci-styles',
 					ACFCI_PLUGIN_URL . 'assets/css/styles.css'
 				);
-				$image = get_field('cover_image');
-		        $custom_css = "
-		                .cover-media-container {
-		                        background-image: url(" . $image['url'] . ");
-		                }";
-		        wp_add_inline_style( 'acfci-styles', $custom_css );
+                // Image styles
+                if(get_field('cover_type_of_media') == 'image') {
+    				$image = get_field('cover_image');
+    		        $custom_css = "
+    		                .cover-media-container {
+    		                        background-image: url(" . $image['url'] . ");
+    		                }";
+    		        wp_add_inline_style( 'acfci-styles', $custom_css );
+                }
 			}
 
 
