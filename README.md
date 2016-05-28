@@ -9,10 +9,16 @@ A WordPress plugin that provides Easy, consistent cover image fields for WordPre
 
 ## Usage
 This plugin requires a small change to your theme:
-### Cover Image Class
-Add the following class to whichever element you want to use for the cover image:
+### Template Tag
+Add the following template tag wherever you want cover images to appear in your theme:
 ````
-.cover-image
+<?php acfci_cover(); ?>
+````
+
+### Recommended CSS
+In order for the cover image to look right, its immediate parent should have something like the following css:
+````
+height: 100vh;
 ````
 
 ### Layout Classes
