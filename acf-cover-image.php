@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: ACF Cover Image
+Plugin Name: ACF Cover Media
 Plugin URI: 
-Description: Cover images for WordPress content using ACF Pro 5
+Description: Cover media for WordPress content using ACF Pro 5
 Version: 1.0
 Author: Michael W. Delaney
 Author URI: 
