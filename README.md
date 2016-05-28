@@ -1,4 +1,4 @@
-# Advanced Custom Fields Cover Image
+# Advanced Custom Fields Cover Media
 NOTE: This plugin is very much a work in progress. It includes a small number of layouts now, and will include more as time allows.
 
 A WordPress plugin that provides Easy, consistent cover image fields for WordPress and ACF Pro 5.
