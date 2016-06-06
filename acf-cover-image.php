@@ -125,7 +125,7 @@ function ci_classes() {
              * Add cover image layout classes to the body
              */
             function body_classes( $classes ) {
-                if(get_field('cover_type_of_media') != 'none') {
+                if(get_field('cover_type_of_media') && get_field('cover_type_of_media') != 'none') {
                     $classes[]      = 'cover-media';
                     $classes[]      = 'cover-media-' . get_field('cover_type_of_media');
                     $classes[]      = 'cover-media-layout-' . get_field('cover_media_layout');
