@@ -169,10 +169,12 @@ function ci_classes() {
             /**
              * Build the shortcode, call templates
              */
-                function acf_cover() { 
+                function acf_cover() {
+                  if( get_field('cover_type_of_media') && get_field('cover_type_of_media') != 'none' ) {
                     ob_start();
                     ci_template( 'cover-base', get_post_type() );
                     return ob_get_clean();
+                  }
                 }
 
 
