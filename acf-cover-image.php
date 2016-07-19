@@ -43,7 +43,7 @@ License: MIT
 
 /**
  * Set classes for the cover image container. These can be overridden or added to with a filter like the following:
- *     add_filter( 'cover_image_set_classes', 'custom_cover_classes' );
+ *     add_filter( 'cover_media_set_classes', 'custom_cover_classes' );
  *     function custom_cover_classes($classes) {
  *         if(is_page_template('template-landing-page.php') {
  *             $classes[]   = 'on-landing-page';
@@ -56,10 +56,10 @@ License: MIT
 function ci_classes() {
     $classes    = array();
     $classes[]  = 'cover-media-container';
-    $classes[]  = 'cover-media-' . get_field('cover_image_layout');
+    $classes[]  = 'cover-media-' . get_field('cover_media_layout');
     
     $classes = array_filter(array_map('trim', $classes));
-    echo trim(implode(' ', apply_filters( 'cover_image_set_classes', $classes )));
+    echo trim(implode(' ', apply_filters( 'cover_media_set_classes', $classes )));
 }
 
 
