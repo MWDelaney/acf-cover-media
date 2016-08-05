@@ -204,8 +204,22 @@ if( function_exists('acf_add_local_field_group') ):
     * Default: post_type == page
     *
     * Declare theme support for specific post types:
-    *   add_theme_support( 'cover-image-location', array( array('page_template', '==', 'landing-page'), array('page_template', '==', 'home') ) );
-    */
+    * $landing_page_templates = array(
+    * 	array (
+    * 		array (
+    * 			'param' => 'post_type',
+    * 			'operator' => '==',
+    * 			'value' => 'page',
+    * 		),
+    * 		array (
+    * 			'param' => 'page_template',
+    * 			'operator' => '!=',
+    * 			'value' => 'template-no-header-image.php',
+    * 		),
+    *	),
+    * );
+    * add_theme_support( 'cover-image-location', $landing_page_templates );
+ */
 
     //Check if theme support is explicitly defined. If so, enable all attachments declared in theme support.
     if( current_theme_supports( 'cover-image-location' ) ) {
