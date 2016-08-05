@@ -28,9 +28,19 @@ Layout classes are added to the body tag and can be used to style the cover imag
 By cover images are enabled for Pages, to define which post types cover images should be available on, declare theme support:
 
 ````
-$landing_page_templates = array(
-  array('page_template', '==', 'template-landing.php'), 
-  array('page_template', '==', 'template-home.php')
-);
-add_theme_support( 'cover-image-location', $landing_page_templates );
+ $landing_page_templates = array(
+   array (
+     array (
+       'param' => 'post_type',
+       'operator' => '==',
+       'value' => 'page',
+     ),
+     array (
+       'param' => 'page_template',
+       'operator' => '!=',
+       'value' => 'template-no-header-image.php',
+     ),
+   ),
+ );
+ add_theme_support( 'cover-image-location', $landing_page_templates );
 ````
