@@ -1,3 +1,3 @@
 <div class="embed-container">
-	<?php the_field('cover_video_hosted'); ?>
+	<?php the_sub_field('video'); ?>
 </div>
