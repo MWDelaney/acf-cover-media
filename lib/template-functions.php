@@ -28,7 +28,7 @@
 function ci_classes() {
     $classes    = array();
     $classes[]  = 'cover-media-container';
-    $classes[]  = 'cover-media-' . get_field('cover_media_layout');
+    $classes[]  = 'cover-media-' . get_row_layout();
 
     $classes = array_filter(array_map('trim', $classes));
     echo trim(implode(' ', apply_filters( 'cover_media_set_classes', $classes )));
