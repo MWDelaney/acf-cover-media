@@ -61,15 +61,6 @@ namespace MWD\ACFCM;
 						'acfci-styles',
 						ACFCI_PLUGIN_URL . 'assets/css/styles.css'
 					);
-									// Image styles
-									if(get_field('cover_type_of_media') == 'image') {
-							$image = get_field('cover_image');
-									$custom_css = "
-													.cover-media-container {
-																	background-image: url(" . $image['url'] . ");
-													}";
-									wp_add_inline_style( 'acfci-styles', $custom_css );
-									}
 				}
 
 
@@ -80,7 +71,7 @@ namespace MWD\ACFCM;
 		 * @uses acf-cover Function to build the shorcode
 		 */
 				function add_shortcodes() {
-							add_shortcode( 'acf-cover', array($this, 'acf_cover'));
+					add_shortcode( 'acf-cover', array($this, 'acf_cover'));
 				}
 
 
@@ -89,9 +80,9 @@ namespace MWD\ACFCM;
 		 * Build the shortcode, call templates
 		 */
 				function acf_cover() {
-						ob_start();
-						ci_template( 'cover-media' );
-						return ob_get_clean();
+					ob_start();
+					ci_template( 'cover-media' );
+					return ob_get_clean();
 				}
 
 
