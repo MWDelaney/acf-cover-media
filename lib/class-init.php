@@ -44,10 +44,12 @@ namespace MWD\ACFCM;
 				 * Add cover image layout classes to the body
 				 */
 				function body_classes( $classes ) {
-						if(get_field('cover_type_of_media') && get_field('cover_type_of_media') != 'none') {
+						if(have_rows('media_type')) {
 								$classes[]      = 'cover-media';
-								$classes[]      = 'cover-media-' . get_field('cover_type_of_media');
-								$classes[]      = 'cover-media-layout-' . get_field('cover_media_layout');
+								while ( have_rows('media_type') ) : the_row();
+									$classes[] = 'cover-media-' . get_row_layout();
+								endwhile;
+								$classes[]      = 'cover-media-layout-' . get_field('layout');
 						}
 						return $classes;
 				}
