@@ -1,9 +1,9 @@
 <?php
 
-namespace MWD\ACFCM;
+namespace MWD\CoverMedia;
 
 
-	class CreateCoverMedia {
+	class Init {
 
 					/**
 					 * Run filters and actions
@@ -20,23 +20,10 @@ namespace MWD\ACFCM;
 									// Add body class for cover image content alignment
 									add_filter( 'body_class', array( $this, 'body_classes' ) );
 
+									// Set up contextual data for templates
+									add_action('acf-cover-media-before-media-base', array( $this, 'media_context' ) );
 
 							}
-
-
-
-			/**
-			 * Add the ACF fields
-			 */
-				public static function create_acf_fields() {
-						$acf_includes = [
-							'lib/acf-fields/cover-image.php'                  // Cover image fields
-						];
-
-						foreach ($acf_includes as $file) {
-							require_once ACFCI_PLUGIN_DIR . $file;
-						}
-				}
 
 
 
@@ -73,19 +60,42 @@ namespace MWD\ACFCM;
 		 * @uses acf-cover Function to build the shorcode
 		 */
 				function add_shortcodes() {
-					add_shortcode( 'acf-cover', array($this, 'acf_cover'));
+					add_shortcode( 'acf-cover', array($this, 'get_acf_cover'));
 				}
 
+
+			/**
+			 * Set up cover media template context
+			 * @return [type] [description]
+			 */
+			function media_context() {
+				$classes    = array();
+		    $classes[]  = 'cover-media-container';
+		    $classes[]  = 'cover-media-' . get_row_layout();
+
+				$classes = apply_filters( 'acf-cover-media-classes', $classes );
+				$data = array('classes' => esc_attr(trim(implode(' ', $classes))));
+				\MWD\CoverMedia\template_data( $data, 'context' );
+			}
 
 
 		/**
 		 * Build the shortcode, call templates
 		 */
-				function acf_cover() {
+				function get_acf_cover() {
 					ob_start();
-					ci_template( 'cover-media' );
+					\MWD\CoverMedia\template( 'cover-media' );
 					return ob_get_clean();
 				}
+
+				/**
+				 * Insert cover image templates
+				 *
+				 */
+			    public static function acf_cover() {
+			        $content = do_shortcode('[acf-cover]');
+			        echo $content;
+			    }
 
 
 }
